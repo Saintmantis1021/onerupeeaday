@@ -1,0 +1,61 @@
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        #container{
+            background-color: #f5f8ff;
+            width: 60%;
+            min-width: 450px;
+            position: relative;
+            margin:  50px auto;
+            padding: 50px 20px;
+            border-radius: 7px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.05);}
+        body{
+            background-color: #ffffff;
+        }
+        #im1{
+
+            height: 100px;
+            width: 100px;
+        }
+        #btn2{
+            background-color: #000000;
+            border: 1px solid #ffffff;
+            border-radius: 7px;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 10px;
+            width: 100px;
+            height: 40px;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        #btn3{
+
+            background-color: #000000;
+            border: 1px solid #ffffff;
+     
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+  <form action="add">
+    {% csrf_token %}
+      {{form}}
+      <button id="btn2">Add</button>
+  </form>
+    </div>
+    
+</body>
+</html>

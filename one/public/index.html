@@ -1,0 +1,145 @@
+
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+    #imgcard{
+        height: 400px;
+        width: 400px;
+    }
+        .hide{
+            display:none;
+            }
+            
+            .show{
+            display:block;
+            }
+    </style>
+</head>
+<body>
+  
+        <div class="flex flex-row justify-between mx-6 my-5">
+            <div>A Rupee a Day</div>
+
+            <div class="flex flex-row gap-4">
+              
+                
+                    <a href="funds">
+                    <button class="mt-2 font-medium text-gray-500 hover:text-gray-900">Funds</button>
+                    </a>
+                    <form action="post">
+                        {% csrf_token %}
+                    <button class="mt-2  font-medium text-gray-500 hover:text-gray-900">Wallet:{{form}}</button>
+                    </form>
+            
+            </div>
+        </div>
+           
+   
+<div class="flex flex-row mx-10">
+    <div class="max-w-sm rounded overflow-hidden shadow-lg mx-5 pt-10">
+        <img id="imgcard"class="w-full" src="{% static '/a.png' %}" alt="Sunset in the mountains">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">Ukraine Crisis</div>
+          <p class="text-gray-700 text-base">
+              Donate to the Ukrainain Cause
+          </p>
+        </div>
+
+        
+        <div class="px-6 pt-4 pb-2">
+
+
+            <button id="donate"  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                Donate
+              </button>
+              <button id="cancel" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                Cancel
+              </button>
+        </div>
+      </div>    <div class="max-w-sm rounded overflow-hidden shadow-lg mx-5 pt-10">
+        <img id="imgcard" class="w-full" src="{% static '/d.png' %}" alt="Sunset in the mountains">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">Earthquake in Japan</div>
+          <p class="text-gray-700 text-base">
+              Donate to the Japan Disaster Relief Fund
+          </p>
+        </div>
+
+        
+        <div class="px-6 pt-4 pb-2">
+
+
+            <button id="donate"  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                Donate
+              </button>
+      
+        </div>
+      </div>    <div class="max-w-sm rounded overflow-hidden shadow-lg mx-5 pt-10">
+        <img id="imgcard" class="w-full" src="{% static '/e.png' %}" alt="Sunset in the mountains">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">Economic Crisis in Sri Lanka</div>
+          <p class="text-gray-700 text-base">
+              Donate to Sri Lanka's Economic Development
+          </p>
+        </div>
+
+        
+        <div class="px-6 pt-4 pb-2">
+
+
+            <button id="donate"  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                Donate
+              </button>
+        
+        </div>
+      </div>
+</div>
+<script>
+
+    window.onload = function(){
+
+        document.getElementById("cancel").style.visibility = "hidden";
+
+        if (sessionStorage['donated'] == "tru"){
+            document.getElementById("donate").style.visibility = "hidden";
+            document.getElementById("cancel").style.visibility = "visible";
+        }
+        else{
+            document.getElementById("donate").style.visibility = "visible";
+            document.getElementById("cancel").style.visibility = "hidden";
+        }
+    };        
+    var button = document.getElementById('donate')
+    button.addEventListener('click',hideshow);
+
+    function hideshow(){
+
+        document.getElementById('donate').style.display = 'block'; 
+        this.style.display = 'none';
+        document.getElementById("cancel").style.visibility = "visible";
+        sessionStorage['donated'] = "tru";
+
+        
+    }
+
+  
+        $("#donate").on('click', function(event){
+            $.ajax({
+           type: "POST",
+            url: "donateclicked",
+            data: { csrfmiddlewaretoken: '{{ csrf_token }}' }, })
+        
+            });
+ 
+</script>
+</body>
+</html>
